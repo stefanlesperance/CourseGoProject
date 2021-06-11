@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'font-awesome-sass', '~> 5.15.1'
-gem 'haml'
+gem "haml-rails", "~> 2.0"
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
