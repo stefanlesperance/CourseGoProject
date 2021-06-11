@@ -2,6 +2,7 @@
   "name": "historygo",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-private-methods": "^7.14.5",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
