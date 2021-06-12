@@ -2,3 +2,9 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+
+
+.nav > li > a:focus, .nav > li > a:hover {
+    text-decoration: none;
+    background-color: #eee;
+}

@@ -10,8 +10,9 @@ import "channels"
 require("trix")
 import 'bootstrap/dist/js/bootstrap'
 import 'bootstrap/dist/css/bootstrap'
-require("stylesheets/application.scss")
+require("stylesheets/application.css.scss")
 require("@rails/actiontext")
+require("@rails/ujs")
 
 Rails.start()
 Turbolinks.start()

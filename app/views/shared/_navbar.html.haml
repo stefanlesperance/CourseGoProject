@@ -1,25 +1,27 @@
-%nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  %a.navbar-brand{:href => "#"} Navbar
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+  %a.navbar-brand{:href => "/"}
+    %i.fas.fa-flag
+    Brand
   %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
     %span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.navbar-nav.mr-auto
-      %li.nav-item.active
-        %a.nav-link{:href => "#"}
-          Home
-          %span.sr-only (current)
-      %li.nav-item
-        %a.nav-link{:href => "#"} Link
-      %li.nav-item.dropdown
-        %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-          Dropdown
-        .dropdown-menu{"aria-labelledby" => "navbarDropdown"}
-          %a.dropdown-item{:href => "#"} Action
-          %a.dropdown-item{:href => "#"} Another action
-          .dropdown-divider
-          %a.dropdown-item{:href => "#"} Something else here
-      %li.nav-item
-        %a.nav-link.disabled{:href => "#"} Disabled
-    %form.form-inline.my-2.my-lg-0
-      %input.form-control.mr-sm-2{"aria-label" => "Search", :placeholder => "Search", :type => "search"}/
-      %button.btn.btn-outline-success.my-2.my-sm-0{:type => "submit"} Search
+      = link_to root_path, class: "nav-link #{'active font-weight-bold' if current_page?(root_path)}" do
+        .fa.fa-home
+        Home
+    %ul.navbar-nav.mr-right
+      - if current_user
+        %li.nav-item.dropdown
+          %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+            .fa.fa-user
+            %b= current_user.email
+          .dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+            = link_to edit_user_registration_path, class: "dropdown-item #{'active font-weight-bold' if current_page?(edit_user_registration_path)}" do
+              .fa.fa-cog
+              %b Account settings
+            = link_to destroy_user_session_path, :method => :delete, class: "dropdown-item" do
+              .fa.fa-sign-out-alt
+              %b Sign out
+      - else
+        = link_to "Log in", new_user_session_path, class: "nav-link #{'active font-weight-bold' if current_page?(new_user_session_path)}"
+        = link_to "Sign up", new_user_registration_path, class: "nav-link #{'active font-weight-bold' if current_page?(new_user_registration_path)}"
