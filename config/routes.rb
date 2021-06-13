@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :courses
   root'home#index'
+  get '/search' => 'search#search', :as => 'search_page'
   devise_scope :user do
      get 'users/sign_out', to: 'devise/sessions#destroy'
   end
