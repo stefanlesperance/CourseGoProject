@@ -4,7 +4,7 @@ class User < ApplicationRecord
   #Course is pluralized 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :trackable
+         :trackable, :confirmable
   has_many :courses
   def to_s
     email
