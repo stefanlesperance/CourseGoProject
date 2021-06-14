@@ -26,6 +26,7 @@ class CoursesController < ApplicationController
 
   # POST /courses or /courses.json
   def create
+    byebug
     @course = Course.new(course_params)
     @course.user = current_user
 
@@ -65,7 +66,10 @@ class CoursesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
-      @course = Course.find(params[:id])
+      # This is the old
+      #@course = Course.find(params[:id])
+      # This is new. Now we are looking for a DB entry via a slug field.
+      @course = Course.friendly.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
