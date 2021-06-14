@@ -1,12 +1,69 @@
 -# Comment Test - Note the below shows a nested under H1. H1 will be applied to both of these, based on the indentation.
 -# I will need to be very careful, then, with my indents
-%h1 
-	Home#HelloWorld
-	%p Find me in app/views/home/index.html.erb
+.jumbotron
+	.display-4
+		What do you want to learn today?
 
-= link_to root_path do
-	.fa.fa-home
+	.p-4
 
-= link_to courses_path, class: 'btn btn-success' do
-	.fa.fa-book
-	Course
+	.form-inline.my-2.my-lg-0
+		= form_tag(courses_path, method: :get) do
+			.input-group
+				= text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Search", class: 'form-control-sm'
+				%span.input-group-append
+					%button.btn.btn-primary.btn-sm{:type => "submit"}
+						%span.fa.fa-search{"aria-hidden" => "true"}
+
+
+.card-group
+	.card.card-body
+		%h1
+			.fa.fa-graduation-cap
+		= Course.count
+		online courses
+		.row
+		Explore a variety of fresh topics
+	.card.card-body
+		%h1
+			.fa.fa-chalkboard-teacher
+			/.fa.fa-brain
+		= Course.distinct.count(:user_id)
+		expert instructors
+		.row
+		Find the right instructor for you
+	.card.card-body
+		%h1
+			.fa.fa-user-graduate
+		= User.count
+		active learners
+		.row
+		Join the knowledge sharing community
+	.card.card-body
+		%h1
+			.fa.fa-infinity
+		Lifetime access
+		.row
+		Learn on your schedule
+
+
+
+
+%hr
+%h2
+	Popular Courses
+.card-columns
+	- @courses.each do |course|
+		= render 'courses/course', course: course
+%hr
+%h2
+	Top Rated Courses
+.card-columns
+	- @courses.each do |course|
+		= render 'courses/course', course: course
+%hr
+%h2
+	Most Recent Courses
+.card-columns
+	- @latest_courses.each do |course|
+		= render 'courses/course', course: course
+

@@ -1,0 +1,7 @@
+%br/
+.container
+  - flash.each do |name, msg|
+    %div{:class => "alert alert-#{name.to_s == 'notice' ? 'success' : 'danger'} alert-dismissible fade show", :role => "alert"}
+      = msg
+      %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+        %span{"aria-hidden" => "true"} ×
