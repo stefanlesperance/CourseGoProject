@@ -1,0 +1,8 @@
+= link_to 'Courses', courses_path
+\/
+= link_to @course.title ,course_path(@course)
+
+%p
+
+= render 'courses/course', course: @course
+
