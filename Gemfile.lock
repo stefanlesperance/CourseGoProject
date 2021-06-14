@@ -105,6 +105,8 @@ GEM
     ffi (1.15.1)
     font-awesome-sass (5.15.1)
       sassc (>= 1.11)
+    friendly_id (5.4.2)
+      activerecord (>= 4.0.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     haml (5.2.1)
@@ -116,6 +118,7 @@ GEM
       haml (>= 4.0.6, < 6.0)
       html2haml (>= 1.0.1)
       railties (>= 5.1)
+    hirb (0.7.3)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
       haml (>= 4.0, < 6)
@@ -264,7 +267,9 @@ DEPENDENCIES
   devise
   faker!
   font-awesome-sass (~> 5.15.1)
+  friendly_id (~> 5.4.0)
   haml-rails (~> 2.0)
+  hirb (~> 0.7.3)
   jbuilder (~> 2.7)
   jquery-rails
   listen (~> 3.3)
