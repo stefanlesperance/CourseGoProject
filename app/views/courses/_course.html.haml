@@ -1,9 +1,18 @@
 .card
 	.card-header
-		.fa.fa-book
+		.fa.fa-graduation-cap
 		= link_to course.title ,course_path(course)
 	.card-body
-		= course.description
+		%small= simple_format(course.short_description)
+	.card-footer
+		.row
+		.fa.fa-signal
+		= course.level
+		.row
+		.fa.fa-globe-europe
+		= course.language
+		.row
+		= number_to_currency(course.price)
 	.card-footer
 		.far.fa-clock
 		= course.created_at.strftime('%d-%b-%Y')

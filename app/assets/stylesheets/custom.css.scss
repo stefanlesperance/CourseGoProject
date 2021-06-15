@@ -8,3 +8,6 @@
     text-decoration: none;
     background-color: #eee;
 }
+
+.form-control.is-invalid {background-image: none !important;}
+.form-control.is-valid {background-image: none !important;}
