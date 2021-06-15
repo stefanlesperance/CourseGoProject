@@ -20,5 +20,7 @@ class Course < ApplicationRecord
 	  def self.levels
 	    LEVELS.map { |level| [level, level] }
 	  end
-
+	  include PublicActivity::Model
+	  # We track the owner by assigning it based on the current user
+	  tracked owner: Proc.new{ |controller, model| controller.current_user}
 end

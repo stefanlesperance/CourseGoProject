@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
 	before_action :authenticate_user!
 
+	include PublicActivity::StoreController #save current_user using gem public activity
+
 	before_action :set_global_variables, if :user_signed_in?
 	#From my understanding, if the user is signed in, search will work.
 	#it will create a GLOBAL variable, accessible everywhere, which, presumably, will be used to search

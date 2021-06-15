@@ -1,0 +1,14 @@
+%h1
+	Activity
+	.badge.badge-info
+		=@activity.count
+
+%ul.list-group
+	- @activity.each do |activity|
+		%li.list-group-item
+			=activity.id
+			=activity.trackable_type
+			=activity.trackable_id
+			=activity.key
+			=activity.parameters
+			=activity.owner
