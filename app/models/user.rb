@@ -11,8 +11,6 @@ class User < ApplicationRecord
   end
 
   def username
-    if email.present?
-      self.email.split(/@/).first
-    end
+    self.email.split(/@/).first
   end
 end
