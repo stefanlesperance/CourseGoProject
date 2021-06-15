@@ -7,7 +7,11 @@ class CoursesController < ApplicationController
     if params[:title]
       @courses = Course.where('title ILIKE ?', "%#{params[:title]}%") #case insensitive
     else
-      @courses = Course.all
+      @q = Course.ransack(params[:q])
+      # Distinct true must be removed from the new version, because of course, the user will not be 'unique'
+        #he will appear multiple times.
+      #@courses = @q.result.includes(distinct: true)
+      @courses = @q.result.includes(:user)
     end
   end
 
@@ -26,7 +30,6 @@ class CoursesController < ApplicationController
 
   # POST /courses or /courses.json
   def create
-    byebug
     @course = Course.new(course_params)
     @course.user = current_user
 

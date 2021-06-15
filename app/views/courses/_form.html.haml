@@ -7,8 +7,8 @@
     = f.input :title
     = f.label :description
     = f.rich_text_area :description
-    = f.input :short_description
-    = f.input :language, collection: ["English", "French", "Spanish"]
+    %small= f.error :short_description, class: "text-danger"
+    = f.input :language, collection: ["English", "Polish", "Russian", "Spanish"]
     = f.input :level, collection: ["Beginner", "Intermediate", "Advanced"]
     = f.input :price
   .form-actions

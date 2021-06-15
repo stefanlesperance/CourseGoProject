@@ -9,4 +9,10 @@ class User < ApplicationRecord
   def to_s
     email
   end
+
+  def username
+    if email.present?
+      self.email.split(/@/).first
+    end
+  end
 end
