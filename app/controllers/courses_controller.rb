@@ -7,11 +7,15 @@ class CoursesController < ApplicationController
     if params[:title]
       @courses = Course.where('title ILIKE ?', "%#{params[:title]}%") #case insensitive
     else
-      @q = Course.ransack(params[:q])
+      #@q = Course.ransack(params[:q])
       # Distinct true must be removed from the new version, because of course, the user will not be 'unique'
         #he will appear multiple times.
       #@courses = @q.result.includes(distinct: true)
-      @courses = @q.result.includes(:user)
+      #@courses = @q.result.includes(:user)
+
+
+      @ransack_courses = Course.ransack(params[:courses_search], search_key: :courses_search)
+      @courses = @ransack_courses.result.includes(:user)
     end
   end
 
