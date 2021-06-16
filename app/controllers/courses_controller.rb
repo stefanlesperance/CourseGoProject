@@ -4,9 +4,9 @@ class CoursesController < ApplicationController
   # GET /courses or /courses.json
   def index
     #I should check for emptiness first, that would be helpful, drag that code over.
-    if params[:title]
-      @courses = Course.where('title ILIKE ?', "%#{params[:title]}%") #case insensitive
-    else
+    # if params[:title]
+    #   @courses = Course.where('title ILIKE ?', "%#{params[:title]}%") #case insensitive
+    # else
       #@q = Course.ransack(params[:q])
       # Distinct true must be removed from the new version, because of course, the user will not be 'unique'
         #he will appear multiple times.
@@ -16,7 +16,6 @@ class CoursesController < ApplicationController
 
       @ransack_courses = Course.ransack(params[:courses_search], search_key: :courses_search)
       @courses = @ransack_courses.result.includes(:user)
-    end
   end
 
   # GET /courses/1 or /courses/1.json
