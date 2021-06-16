@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users, only: [:index]
+  resources :users, only: [:index, :edit, :update]
   resources :courses
   root'home#index'
   get 'home/activity'

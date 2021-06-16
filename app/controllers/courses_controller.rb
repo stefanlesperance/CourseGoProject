@@ -13,7 +13,6 @@ class CoursesController < ApplicationController
       #@courses = @q.result.includes(distinct: true)
       #@courses = @q.result.includes(:user)
 
-
       @ransack_courses = Course.ransack(params[:courses_search], search_key: :courses_search)
       @courses = @ransack_courses.result.includes(:user)
   end
@@ -29,6 +28,7 @@ class CoursesController < ApplicationController
 
   # GET /courses/1/edit
   def edit
+      authorize @course
   end
 
   # POST /courses or /courses.json

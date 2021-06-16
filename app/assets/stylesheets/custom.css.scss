@@ -12,7 +12,13 @@
 .form-control.is-invalid {background-image: none !important;}
 .form-control.is-valid {background-image: none !important;}
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
+    color: #fff !important;
+    background-color: #00b3db !important;
+    border-color: #285e8e !important; /*set the color you want here*/
+}
+
+.a {
     color: #fff !important;
     background-color: #00b3db !important;
     border-color: #285e8e !important; /*set the color you want here*/
