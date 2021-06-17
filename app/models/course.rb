@@ -3,6 +3,8 @@ class Course < ApplicationRecord
 	validates :description, presence: true, length: { :minimum => 5}
 	#Singular 'user' as it belongs to only one at a time
 	belongs_to :user
+	#dependent: :destroy -> Course with lessons, if destroyed, will automatically destroy those linked lessons
+	has_many :lessons, dependent: :destroy
 	def to_s
 		title
 	end

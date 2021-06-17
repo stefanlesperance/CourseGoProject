@@ -9,6 +9,12 @@ class User < ApplicationRecord
     rolify
 
   has_many :courses
+
+  extend FriendlyId
+    friendly_id :email, use: :slugged
+
+
+
   def to_s
     email
 end
@@ -35,10 +41,17 @@ end
 
   validate :must_have_a_role, on: :update
 
+  def online?
+    #Basically if the updated at was changed less than two minutes ago, they are deemed 'online'
+    updated_at > 2.minutes.ago
+  end
+
     private
     def must_have_a_role
       unless roles.any?
         errors.add(:roles, "must have at least one role")
       end
     end
+
+
 end

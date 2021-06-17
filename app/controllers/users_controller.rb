@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
 		
 		@q = User.ransack(params[:q])
-		@users = @q.result(distinct: true)
+	@users = @q.result(distinct: true)
 
 	end
 
@@ -31,11 +31,7 @@ class UsersController < ApplicationController
 	private
 
 	def set_user
-		if params[:id] = sign_out
-			redirect_to root_path
-		else
-			@user = User.find(params[:id])
-		end
+		@user = User.friendly.find(params[:id])
 	end
 
 	def user_params

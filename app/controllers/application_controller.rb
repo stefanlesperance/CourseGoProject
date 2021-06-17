@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
 	before_action :authenticate_user!
 
+	after_action :user_activity
+
 	include Pundit
   	rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
@@ -16,10 +18,19 @@ class ApplicationController < ActionController::Base
 
 	private
 
-	  def user_not_authorized #pundit method see above
-	    flash[:alert] = "You are not authorized to perform this action."
-	    redirect_to(request.referrer || root_path)
-	  end
+	def user_activity
+		#try - a method that usually receives another method, denoted by a symbol
+		#symbol :SYMBOL
+		#try is meant to avoid a nil issue, where nil is returned, potentially breaking the program
+		current_user.try :touch
+		#touch meanwhile is used to update the updated_at field for persisted objects
+		# Ultimately the above method exists to try and update the updated_at field without breaking the program by returning nil
+	end
+
+  def user_not_authorized #pundit method see above
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_to(request.referrer || root_path)
+  end
 
 
 end
