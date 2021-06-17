@@ -5,8 +5,14 @@
 
   .form-inputs
     = f.input :title
-    = f.input :content
-    = f.association :course
+    /= f.input :content
+    = f.label :content
+    = f.rich_text_area :content
+    /= f.association :course
+    -# = this piece of code lets me fill in the association provided there is a parameter at all, and is kept hidden.
+    -# = good thing to note for the future
+    = f.input :course_id, input_html: {value: @lesson.course_id || params[:course_id]}, as: :hidden
+
 
   .form-actions
     = f.button :submit

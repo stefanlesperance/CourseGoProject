@@ -3,7 +3,7 @@
     = link_to lesson.title, lesson_path(lesson)
   .card-body
     = lesson.title
-    = lesson.course
+    = lesson.content
   .card-footer
     = link_to 'Edit', edit_lesson_path(lesson), class: 'btn btn-sm btn-warning' 
     = link_to 'Destroy', lesson, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' 
