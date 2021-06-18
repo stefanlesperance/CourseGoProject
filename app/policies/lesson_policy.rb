@@ -26,6 +26,8 @@ class LessonPolicy < ApplicationPolicy
 
   def create?
     #@user.has_role?(:teacher)
+    #Comparing the user id of the course's ActiveRecord versus THAT of the individual attempting to create
+    @record.course.user_id == @user.id
   end
 
   def destroy?

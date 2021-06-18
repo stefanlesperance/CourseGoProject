@@ -101,6 +101,9 @@ GEM
       warden (~> 1.2.3)
     erubi (1.10.0)
     erubis (2.7.0)
+    exception_notification (4.4.3)
+      actionmailer (>= 4.0, < 7)
+      activesupport (>= 4.0, < 7)
     execjs (2.8.1)
     ffi (1.15.1)
     font-awesome-sass (5.15.1)
@@ -277,6 +280,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   devise
+  exception_notification
   faker!
   font-awesome-sass (~> 5.15.1)
   friendly_id (~> 5.4.0)

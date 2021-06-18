@@ -34,6 +34,7 @@ gem 'ransack'
 gem 'public_activity', '~> 1.5'
 gem "rolify"
 gem "pundit"
+gem 'exception_notification'
 
 
 # Use Active Storage variant
