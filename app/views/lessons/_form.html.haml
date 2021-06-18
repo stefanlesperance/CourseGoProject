@@ -1,5 +1,5 @@
 -# frozen_string_literal: true
-= simple_form_for(@lesson) do |f|
+= simple_form_for([@course, @lesson]) do |f|
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
@@ -11,7 +11,7 @@
     /= f.association :course
     -# = this piece of code lets me fill in the association provided there is a parameter at all, and is kept hidden.
     -# = good thing to note for the future
-    = f.input :course_id, input_html: {value: @lesson.course_id || params[:course_id]}, as: :hidden
+    /= f.input :course_id, input_html: {value: @lesson.course_id || params[:course_id]}, as: :hidden
 
 
   .form-actions
