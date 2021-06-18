@@ -12,6 +12,7 @@ class Lesson < ApplicationRecord
     tracked owner: Proc.new{ |controller, model| controller.current_user}
 
     #This converts the title to a proper string from the ActiveRecord piece it currently is.
+    #This is a new note.
     def to_s
       title
     end
