@@ -1,8 +1,10 @@
 %p#notice=notice
 
+-# Below is a solid breadcrumbs style to emulate
+
 = link_to 'Courses', courses_path
 \/
-= link_to @lesson.course.title ,courses_path(@course)
+= link_to @lesson.course.title ,course_path(@lesson.course)
 \/
 = link_to @lesson.title ,lesson_path(@lesson)
 .row
