@@ -109,6 +109,17 @@ Rails.application.configure do
     authentication:       'login'
      }
 
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+    email: {
+      deliver_with: :deliver, # Rails >= 4.2.1 do not need this option since it defaults to :deliver_now
+      email_prefix: '[PREFIX] ',
+      sender_address: %{"coursego error" <support@coursego.com>},
+      exception_recipients: %w{Rails.application.credentials.aws[:gmail]}
+    }
+
+
+
+
   # Inserts middleware to perform automatic connection switching.
   # The `database_selector` hash is used to pass options to the DatabaseSelector
   # middleware. The `delay` is used to determine how long to wait after a write
