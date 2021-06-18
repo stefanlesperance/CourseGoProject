@@ -1,5 +1,6 @@
 .card
   .card-header
+    .far.fa-check-square
     = link_to lesson.title, course_lesson_path(@course, lesson)
   - if policy(lesson).edit? 
     .card-body
