@@ -5,6 +5,8 @@
 
 %p
 
+
+
 .row
   .col-md-2
     = search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f|
@@ -31,3 +33,4 @@
     .card-columns
       - @courses.each do |course|
         = render 'courses/course', course: course
+    != pagy_bootstrap_nav(@pagy)
