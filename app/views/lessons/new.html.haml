@@ -1,3 +1,14 @@
+- content_for :title do 
+	Coursego
+	\|
+	= @course.title
+	\|
+	New Lesson
+end
+
+
+
+
 = link_to 'Courses', courses_path
 \/
 = link_to @course.title ,course_path(@course)

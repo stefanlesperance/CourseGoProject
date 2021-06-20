@@ -1,3 +1,12 @@
+- content_for :title do 
+  Coursego
+  \|
+  = @lesson.course.title
+  \|
+  = @lesson.title
+end
+
+
 %p#notice=notice
 
 -# Below is a solid breadcrumbs style to emulate
