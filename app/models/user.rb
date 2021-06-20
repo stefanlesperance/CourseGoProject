@@ -9,11 +9,10 @@ class User < ApplicationRecord
     rolify
 
   has_many :courses
+  has_many :enrollments
 
   extend FriendlyId
     friendly_id :email, use: :slugged
-
-
 
   def to_s
     email

@@ -1,0 +1,17 @@
+- content_for :title do 
+  Coursego
+  \|
+  New Enrollment
+
+
+%h3 New enrollment
+.card
+  .card-header
+    %h3 
+      .fa.fa-lock-open
+      New Enrollment
+  .card-body
+    = render 'form'
+  .card-footer
+    = link_to 'Back', enrollments_path
+

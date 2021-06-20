@@ -1,0 +1,20 @@
+- content_for :title do 
+  Coursego
+  \|
+  Editing
+  = @enrollment
+
+
+%h3 Editing enrollment
+
+.card
+  .card-header
+    %h3 
+      .fa.fa-lock-open
+      Editing course
+  .card-body
+    = render 'form'
+  .card-footer
+    = link_to 'Show', @enrollment
+    \|
+    = link_to 'Back', enrollments_path
