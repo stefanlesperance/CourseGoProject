@@ -23,6 +23,9 @@
 	.ml-2
 	= link_to 'refresh', users_path
 %br
+
+!= pagy_bootstrap_nav(@pagy)
+
 .table-responsive
 	%table.table.table-bordered.table-striped.table-sm
 		%thead

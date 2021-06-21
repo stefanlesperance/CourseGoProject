@@ -5,7 +5,8 @@ class UsersController < ApplicationController
 
 		
 		@q = User.ransack(params[:q])
-		@users = @q.result(distinct: true)
+		@pagy, @users = pagy(@q.result(distinct: true), items: 5)
+
 		authorize @users
 
 	end
