@@ -23,13 +23,13 @@ class Course < ApplicationRecord
 	  def self.levels
 	    LEVELS.map { |level| [level, level] }
 	  end
-	  include PublicActivity::Model
+  include PublicActivity::Model
 	  # We track the owner by assigning it based on the current user
 	  tracked owner: Proc.new{ |controller, model| controller.current_user}
 
 	  def bought(user)
 	  	#Not sure why user.id is inside []
-	  	self.enrollments.where(user_id: [user.id], course_id: [self.id].empty?)
+	  	self.enrollments.where(user_id: [user.id], course_id: [self.id]).empty?
 	  end
 
 

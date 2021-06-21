@@ -7,7 +7,7 @@ class LessonPolicy < ApplicationPolicy
   
   #Don't forget the question mark!
   def show?
-    @user.has_role?(:admin) || @record.course.user_id == @user.id
+    @user.has_role?(:admin) || @record.course.user_id == @user.id || @record.course.bought(@user) == false
   end
 
 
