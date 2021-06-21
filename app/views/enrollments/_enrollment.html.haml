@@ -1,0 +1,23 @@
+.card
+	.card-header
+		.fa.fa-user
+		= link_to enrollment.user.username, user_path(enrollment.user)
+		.fa.fa-clock
+		= time_ago_in_words(enrollment.updated_at)
+		.fa.fa-graduation-cap
+		= link_to enrollment.course, course_path(enrollment.course)
+	.card-body
+		.row
+			.fa.fa-comment
+			%small= enrollment.review
+		.row
+			%b= enrollment.rating
+			.text-warning.fa.fa-star
+	-if current_user
+		.card-footer
+			- if policy(enrollment).edit?
+				.row
+					=link_to "Edit Review", edit_enrollment_path(enrollment), class: 'btn btn-sm btn-warning' 
+				%p
+				.row
+					=link_to "Delete Review", enrollment, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' 
