@@ -5,7 +5,8 @@ class UsersController < ApplicationController
 
 		
 		@q = User.ransack(params[:q])
-	@users = @q.result(distinct: true)
+		@users = @q.result(distinct: true)
+		authorize @users
 
 	end
 
