@@ -6,7 +6,10 @@
 		%small= simple_format(course.short_description)
 	.card-footer
 		.text-center
-			= enrollment_button(course)
+			.row
+				= enrollment_button(course)
+			.row
+				= review_button(course)
 	.card-footer
 		.fa.fa-tasks
 		= course.lessons.count

@@ -22,4 +22,25 @@ module CoursesHelper
 			link_to "Check Price", course_path(course), class: "btn btn-md btn-success"
 		end
 	end
+
+
+	def review_button(course)
+		user_course = course.enrollments.where(user: current_user)
+		#First, verify if there is, in fact, a user.
+		if current_user
+			#Lets see if the course enrollments include the current_user
+			if user_course.any?
+				#If so, let's check if there are any ratings (I think this works because we're effectively searching
+				# based on the prior user.id, so it is if HE has left one. It'd be interesting to test. Tested - Confirmed)
+				#Original code shifted to Scope in 
+				if user_course.pending_review.any?
+					link_to 'Add A Review', edit_enrollment_path(user_course.first)
+				else 
+					"You have already reviewed. Thanks!"
+					link_to "Your Review", enrollment_path(user_course.first)
+				end
+			end
+		end
+
+	end
 end
