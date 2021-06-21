@@ -1,6 +1,7 @@
 module CoursesHelper
 	#This seems to define a method being called as a button in my view.
 	#Long term, keep logic OUT of views. Starve Views, Skinny Controllers, Fat Models
+	#Fascinating way to employ a helper and keep my code miles from view or anything else.
 	def enrollment_button(course)
 		if current_user
 			#Buying Logic Course

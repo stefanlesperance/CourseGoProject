@@ -45,12 +45,20 @@ end
     updated_at > 2.minutes.ago
   end
 
+    def buy_course(course)
+      #This is designed to buy the course, to trigger the enrollment by summoning Enrollments method.
+      self.enrollments.create(course: course, price: course.price)
+    end
+
+
     private
     def must_have_a_role
       unless roles.any?
         errors.add(:roles, "must have at least one role")
       end
     end
+
+
 
 
 end
