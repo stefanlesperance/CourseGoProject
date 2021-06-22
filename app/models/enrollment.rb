@@ -14,6 +14,10 @@ class Enrollment < ApplicationRecord
   scope :pending_review, -> {where(rating: [0, nil, ""], review: [0, nil, ""])}
 
 
+  extend FriendlyId
+  #We lack an otherwise effective string, so we use the to_s method below, which will provide a generated string
+    friendly_id :to_s, use: :slugged
+
   def to_s
     user.to_s + " " +  course.to_s
   end
