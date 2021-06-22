@@ -4,6 +4,10 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments or /enrollments.json
   def index
     #@enrollments = Enrollment.all
+    #These custom paths for ransack are passed, depending on what ACTION is calling the view.
+    #In Index, itll grab the general, but for my_students, it recognizes the path for that view must be that specific one.
+    #It's genius
+    @ransack_path = enrollments_path
     @q = Enrollment.ransack(params[:q])
     @pagy, @enrollments = pagy(@q.result.includes(:user), items: 5)
     
@@ -12,6 +16,14 @@ class EnrollmentsController < ApplicationController
   end
 
   # GET /enrollments/1 or /enrollments/1.json
+  def my_students
+    @ransack_path = my_students_enrollments_path
+    @q = Enrollment.joins(:course).where(courses: {user: current_user}).ransack(params[:q])
+    @pagy, @enrollments = pagy(@q.result.includes(:user), items: 5)
+    render 'index'
+  end
+
+
   def show
   end
 
