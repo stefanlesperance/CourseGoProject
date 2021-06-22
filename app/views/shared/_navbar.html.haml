@@ -30,9 +30,13 @@
               = link_to purchased_courses_path, class: 'dropdown-item' do
                 .fa.fa-graduation-cap
                 Purchased Courses
+                .badge.badge-danger
+                  = current_user.enrollments.count
               = link_to pending_review_courses_path, class: 'dropdown-item' do
                 .fa.fa-graduation-cap
                 Pending Review
+                .badge.badge-danger
+                  =current_user.enrollments.pending_review.count
         - if current_user.has_role?(:teacher)
           %li.nav-item.dropdown
             %a#teacherDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
@@ -46,9 +50,13 @@
               = link_to created_courses_path, class: 'dropdown-item' do
                 .fa.fa-graduation-cap
                 My Courses
+                .badge.badge-danger
+                  = current_user.courses.count
               = link_to my_students_enrollments_path, class: 'dropdown-item' do
                 .fa.fa-users
                 My Students
+                .badge.badge-danger
+                  = Enrollment.joins(:course).where(courses: {user: current_user}).count
         - if current_user.has_role?(:admin)
           %li.nav-item.dropdown
             %a#adminDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
@@ -58,12 +66,16 @@
               = link_to users_path, class: "dropdown-item" do
                 .fa.fa-user
                 %b Users
+                .badge.badge-danger
+                  = User.count
               = link_to activity_path, class: 'dropdown-item' do
                 .fa.fa-bell
                 %b Activity
               = link_to enrollments_path, class: 'dropdown-item' do
                 .fa.fa-lock-open
                 %b Enrollments
+                .badge.badge-danger
+                  = Enrollment.count
       /SEARCH IN NAVBAR
 
       /.form-inline.my-2.my-lg-0
