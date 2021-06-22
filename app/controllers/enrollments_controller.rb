@@ -3,9 +3,12 @@ class EnrollmentsController < ApplicationController
   before_action :set_course, only: [:new, :create]
   # GET /enrollments or /enrollments.json
   def index
-    @enrollments = Enrollment.all
+    #@enrollments = Enrollment.all
+    @q = Enrollment.ransack(params[:q])
+    @pagy, @enrollments = pagy(@q.result.includes(:user), items: 5)
+    
+
     authorize @enrollments
-    @pagy, @enrollments = pagy(Enrollment.all, items: 5)
   end
 
   # GET /enrollments/1 or /enrollments/1.json

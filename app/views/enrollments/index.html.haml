@@ -12,6 +12,20 @@
 
 != pagy_bootstrap_nav(@pagy)
 
+%p
+
+= search_form_for @q do |f|
+  = f.search_field :review_cont, placeholder: 'review'
+  = f.search_field :rating_eq, placeholder: 'rating'
+  = f.search_field :user_email_cont, placeholder: 'user'
+  = f.search_field :course_title_cont, placeholder: 'course'
+  = f.search_field :course_price_eq, placeholder: 'price'
+  = f.submit
+%p
+= link_to 'Refresh', enrollments_path
+%br
+
+
 
 %h1 Listing enrollments
 
@@ -20,25 +34,30 @@
     %thead
       %tr
         %th ID
+        %th
+          = sort_link(@q, :user_email)
+          /.fa.fa-user
+          /User
         %th 
-          .fa.fa-user
-          User
+          /.fa.fa-clock
+          = sort_link(@q, :created_at)
+          
+        %th
+          /.fa.fa-graduation-cap
+          = sort_link(@q, :course_title) 
+          /Course
         %th 
-          .fa.fa-clock
-          .fa.fa-lock-open
-          Bought
+          /.fa.fa-dollar-sign  
+          = sort_link(@q, :price) 
+          /Price
         %th 
-          .fa.fa-graduation-cap
-          Course
+          = sort_link(@q, :updated_at) 
+          /.text-warning.fa.fa-clock
+          /Reviewed On
         %th 
-          .fa.fa-dollar-sign  
-          Price
-        %th 
-          .text-warning.fa.fa-clock
-          Reviewed On
-        %th 
-          .text-warning.fa.fa-star
-          Rating
+          = sort_link(@q, :rating) 
+          /.text-warning.fa.fa-star
+          /Rating
         %th 
           .text-warning.fa.fa-comment
           Review
@@ -51,8 +70,8 @@
         %tr
           %td= enrollment.id
           %td= link_to enrollment.user, user_path(enrollment.user)
-          %td= link_to enrollment.course, course_path(enrollment.course)
           %td= enrollment.created_at.strftime("%d/%b/%Y,%H:%M")
+          %td= link_to enrollment.course, course_path(enrollment.course)
           %td= number_to_currency(enrollment.price)
           %td
             -if enrollment.rating.present?
