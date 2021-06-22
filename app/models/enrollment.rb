@@ -4,6 +4,12 @@ class Enrollment < ApplicationRecord
 
   #Ensures no enrollment can exist without the presence of a course or user.
   validates :user, :course, presence: true
+  
+
+  #Effectively forces that if one exists, the other MUST exist.
+  validates_presence_of :rating, if: :review?
+  validates_presence_of :review, if: :rating?
+
 
   validates_uniqueness_of :user_id, scope: :course_id #user cant be subscribed to same course twice
   #User cannot be enrolled  twice, course cannot have the same ID twice. Secured on both ends
