@@ -34,10 +34,18 @@ module CoursesHelper
 				# based on the prior user.id, so it is if HE has left one. It'd be interesting to test. Tested - Confirmed)
 				#Original code shifted to Scope in 
 				if user_course.pending_review.any?
-					link_to 'Add A Review', edit_enrollment_path(user_course.first)
+					link_to edit_enrollment_path(user_course.first) do
+						"<i class='text-warning fa fa-star'></i>".html_safe + " " +
+						"<i class='text-dark fa fa-question'></i>".html_safe + " " +
+						'Add A Review'
+					end
 				else 
-					"You have already reviewed. Thanks!"
-					link_to "Your Review", enrollment_path(user_course.first)
+					link_to edit_enrollment_path(user_course.first) do
+						"<i class='text-warning fa fa-star'></i>".html_safe + " " +
+						"<i class='fa fa-check'></i>".html_safe + " " +
+						"Thanks For Reviewing"
+					end
+					
 				end
 			end
 		end

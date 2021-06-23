@@ -1,11 +1,12 @@
 - content_for :title do 
   Coursego
   \|
-  All Enrollments
+  = action_name.humanize
+  Enrollments
 
 
 %h3
-  Enrollments
+  = action_name.humanize
   .badge.badge-info
     =@enrollments.count
 %p

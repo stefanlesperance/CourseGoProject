@@ -1,13 +1,13 @@
 - content_for :title do 
   Coursego
   \|
+  = action_name.humanize
   Courses
-end
 
 
 
 %h3
-  Courses
+  =action_name.humanize
   .badge.badge-info
     =@courses.count
 

@@ -8,8 +8,8 @@ class User < ApplicationRecord
 
     rolify
 
-  has_many :courses, counter_cache: true
-  has_many :enrollments, counter_cache: true
+  has_many :courses
+  has_many :enrollments
 
   extend FriendlyId
     friendly_id :email, use: :slugged
@@ -47,7 +47,7 @@ end
 
     def buy_course(course)
       #This is designed to buy the course, to trigger the enrollment by summoning Enrollments method.
-      self.enrollments.create(course: course, price: course.price)
+      enrollments.create(course: course, price: course.price)
     end
 
 

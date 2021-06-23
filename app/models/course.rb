@@ -6,6 +6,9 @@ class Course < ApplicationRecord
 	#dependent: :destroy -> Course with lessons, if destroyed, will automatically destroy those linked lessons
 	has_many :lessons, dependent: :destroy
 	has_many :enrollments, dependent: :destroy
+
+	validates :title, uniqueness: true
+
 	def to_s
 		title
 	end
