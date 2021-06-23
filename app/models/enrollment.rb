@@ -18,6 +18,7 @@ class Enrollment < ApplicationRecord
   validate :cant_subscribe_to_own_course # user cannot subscribe if course.user == current_user.
 
   scope :pending_review, -> {where(rating: [0, nil, ""], review: [0, nil, ""])}
+  scope :reviewed, -> {where.not(review: [0, nil, ""])}
 
 
   extend FriendlyId

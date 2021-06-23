@@ -23,7 +23,7 @@ class CoursesController < ApplicationController
 
   def purchased
     @ransack_path = purchased_courses_path
-  @ransack_courses = Course.joins(:enrollments).where(enrollments: {user: current_user}).ransack(params[:courses_search], search_key: :courses_search)
+    @ransack_courses = Course.joins(:enrollments).where(enrollments: {user: current_user}).ransack(params[:courses_search], search_key: :courses_search)
     #Enrollments is needed, because course doesn't record whosee nrolled in it. Hence, the joins/merge
     @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
     render 'index'
