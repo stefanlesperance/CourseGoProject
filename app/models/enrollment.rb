@@ -1,6 +1,6 @@
 class Enrollment < ApplicationRecord
   belongs_to :course, counter_cache: true
-  belongs_to :user
+  belongs_to :user, counter_cache: true
 
   #Ensures no enrollment can exist without the presence of a course or user.
   validates :user, :course, presence: true

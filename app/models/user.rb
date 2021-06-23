@@ -8,8 +8,8 @@ class User < ApplicationRecord
 
     rolify
 
-  has_many :courses
-  has_many :enrollments
+  has_many :courses, counter_cache: true
+  has_many :enrollments, counter_cache: true
 
   extend FriendlyId
     friendly_id :email, use: :slugged
