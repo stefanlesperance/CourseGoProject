@@ -13,6 +13,10 @@
 	.card-footer
 		.text-warning.fa.fa-star
 		= course.average_rating
+		.row
+		.fa.fa-users
+		Enrollments Count:
+		= course.enrollments_count
 	.card-footer
 		.fa.fa-tasks
 		= course.lessons.count
