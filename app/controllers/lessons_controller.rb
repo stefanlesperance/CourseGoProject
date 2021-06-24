@@ -10,6 +10,8 @@ class LessonsController < ApplicationController
   # GET /lessons/1 or /lessons/1.json
   def show
     authorize @lesson
+    # view_lesson beingthe method which verifies things first. Called from, presumably, user.rb (not lesson.rb)
+    current_user.view_lesson(@lesson)
   end
 
   # GET /lessons/new

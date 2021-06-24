@@ -10,13 +10,21 @@ class User < ApplicationRecord
 
   has_many :courses
   has_many :enrollments
+  has_many :user_lessons
 
   extend FriendlyId
     friendly_id :email, use: :slugged
 
   def to_s
     email
-end
+  end
+
+  def view_lesson(lesson)
+    unless self.user_lessons.where(lesson: lesson).any?
+      #Above verifies if any record exists with combination of user and lesson id, before proceeding to the next step.
+      self.user_lessons.create(lesson: lesson)
+    end
+  end
 
   def username
     self.email.split(/@/).first
