@@ -9,6 +9,14 @@ class Course < ApplicationRecord
 
 	validates :title, uniqueness: true
 
+	#scopes for home_controller
+	scope :purchased_courses, -> (user){ joins(:enrollments).where(enrollments: {user: user}).order(created_at: :desc).limit(3)}
+	scope :popular_courses, -> {order(enrollments_count: :desc, created_at: :desc).limit(3)}
+	scope :top_rated_courses, -> {order(average_rating: :desc, created_at: :desc).limit(3)}
+	scope :latest_courses, -> {all.limit(3).order(created_at: :desc)}
+	scope :all_courses, -> {all.limit(3)}
+
+
 	def to_s
 		title
 	end
