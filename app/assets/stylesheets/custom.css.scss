@@ -4,22 +4,13 @@
 
 
 
-.nav > li > a:focus, .nav > li > a:hover {
-    text-decoration: none;
-    background-color: #eee;
-}
+
 
 .form-control.is-invalid {background-image: none !important;}
 .form-control.is-valid {background-image: none !important;}
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
-    color: #fff !important;
-    background-color: #00b3db !important;
-    border-color: #285e8e !important; /*set the color you want here*/
-}
 
-.a {
-    color: #fff !important;
-    background-color: #00b3db !important;
-    border-color: #285e8e !important; /*set the color you want here*/
+a:hover {
+  color: #fff !important;
+  background-color: transparent !important;
 }

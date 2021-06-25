@@ -9,7 +9,11 @@ module CoursesHelper
 				link_to "You created this course. View Analytics", course_path(course)
 				#logic below verifies if any of the enrollments in that course have the current_user
 			elsif course.enrollments.where(user: current_user).any?
-				link_to "You bought this course. Keep Learning!", course_path(course)
+				link_to course_path(course) do
+					"<i class='text-dark fa fa-spinner'></i>".html_safe + " " +
+					number_to_percentage(course.progress(current_user), precision: 0)
+				end
+
 			elsif course.price > 0 #course is not free
 				#you can add buttons here, or replace them with links, its very fascinating.
 				#I suspect STRIPE is up next.

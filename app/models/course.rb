@@ -6,6 +6,7 @@ class Course < ApplicationRecord
 	#dependent: :destroy -> Course with lessons, if destroyed, will automatically destroy those linked lessons
 	has_many :lessons, dependent: :destroy
 	has_many :enrollments, dependent: :destroy
+	has_many :user_lessons, through: :lessons
 
 	validates :title, uniqueness: true
 
@@ -41,6 +42,13 @@ class Course < ApplicationRecord
 	  def bought(user)
 	  	#Not sure why user.id is inside []
 	  	self.enrollments.where(user_id: [user.id], course_id: [self.id]).empty?
+	  end
+
+	  def progress(user)
+	  	#(user_lessons.where(user: user).count /self.lessons.count).to_f*100
+		 unless self.lessons_count == 0
+	      user_lessons.where(user: user).count/self.lessons_count.to_f*100
+	    end
 	  end
 
 
