@@ -5,7 +5,9 @@ class Course < ApplicationRecord
 	belongs_to :user, counter_cache: true
 	#dependent: :destroy -> Course with lessons, if destroyed, will automatically destroy those linked lessons
 	has_many :lessons, dependent: :destroy
-	has_many :enrollments, dependent: :destroy
+	has_many :enrollments, dependent: :restrict_with_error
+		# I removed my dependent: :destroy because users shouldn't lose their courses if enrolled.
+		#It's the sort of real world buisness thinking that must be applied. 
 	has_many :user_lessons, through: :lessons
 
 	validates :title, uniqueness: true
@@ -60,6 +62,5 @@ class Course < ApplicationRecord
 			update_column :average_rating, (0)
 		end
 	end
-
 
 end
