@@ -1,0 +1,20 @@
+- content_for :title do 
+  Coursego
+  \|
+  Editing
+  = @enrollment.to_s
+
+
+%h3 Editing enrollment
+
+.card
+  .card-header
+    %h3 
+      .text-warning.fa.fa-star
+      Add a Review
+  .card-body
+    = render 'form'
+  .card-footer
+    = link_to 'Show Review', @enrollment
+    \|
+    = link_to 'Back To Course', course_path(@enrollment.course)

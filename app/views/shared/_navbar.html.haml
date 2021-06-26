@@ -1,5 +1,5 @@
 %nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-  %a.navbar-brand{:href => root_path} Rubygems
+  %a.navbar-brand{:href => root_path} CourseGo
   %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
     %span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
@@ -11,24 +11,81 @@
             Home
         %li.nav-item{class: "#{'active font-weight-bold' if current_page?(courses_path)}"}
           = link_to courses_path, class: 'nav-link' do
-            .fa.fa-book
+            .fa.fa-graduation-cap
             Courses
-        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_course_path)}"}
-          = link_to new_course_path, class: 'nav-link' do
-            .fa.fa-plus
-            New Course
-      .form-inline.my-2.my-lg-0
-        = form_tag(courses_path, method: :get) do
-          .input-group
-            = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Search", class: 'form-control-sm'
-            %span.input-group-append
-              %button.btn.btn-primary.btn-sm{:type => "submit"}
-                %span.fa.fa-search{"aria-hidden" => "true"}
+        .form-inline
+          = search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f|
+            .input-group
+              = f.search_field :title_cont, class: 'form-control-sm', style: 'float: left; width: 150px; ', placeholder: 'Find a course', :autocomplete => :off
+              %span.input-group-append
+                %button.btn.btn-primary.btn-sm{:type => "submit"}
+                  %span.fa.fa-search{"aria-hidden" => "true"}
+      %ul.navbar-nav.mr-auto
+        - if current_user.has_role?(:student)
+          %li.nav-item.dropdown
+            %a#studentDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+              .fa.fa-graduation-cap
+              Learn 
+            .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "studentDropdown"}
+              = link_to purchased_courses_path, class: 'dropdown-item' do
+                .fa.fa-graduation-cap
+                Purchased Courses
+                .badge.badge-danger
+                  = current_user.enrollments_count
+              = link_to pending_review_courses_path, class: 'dropdown-item' do
+                .fa.fa-graduation-cap
+                Pending Review
+                .badge.badge-danger
+                  =current_user.enrollments.pending_review.count
+        - if current_user.has_role?(:teacher)
+          %li.nav-item.dropdown
+            %a#teacherDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+              Teach
+              .fa.fa-chalkboard-teacher
+            .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "teacherDropdown"}
+              = link_to new_course_path, class: 'dropdown-item' do
+                .fa.fa-graduation-cap
+                .fa.fa-plus
+                New Course
+              = link_to created_courses_path, class: 'dropdown-item' do
+                .fa.fa-graduation-cap
+                My Courses
+                .badge.badge-danger
+                  = current_user.courses_count
+              = link_to my_students_enrollments_path, class: 'dropdown-item' do
+                .fa.fa-users
+                My Students
+                .badge.badge-danger
+                  = Enrollment.joins(:course).where(courses: {user: current_user}).count
+        - if current_user.has_role?(:admin)
+          %li.nav-item.dropdown
+            %a#adminDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+              Admin 
+              .fa.fa-cog
+            .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "adminDropdown"}
+              = link_to users_path, class: "dropdown-item" do
+                .fa.fa-user
+                %b Users
+                .badge.badge-danger
+                  = User.count
+              = link_to activity_path, class: 'dropdown-item' do
+                .fa.fa-bell
+                %b Activity
+              = link_to enrollments_path, class: 'dropdown-item' do
+                .fa.fa-lock-open
+                %b Enrollments
+                .badge.badge-danger
+                  = Enrollment.count
+      /SEARCH IN NAVBAR
+
+      /.form-inline.my-2.my-lg-0
+      /  = form_tag(courses_path, method: :get) do
+      /    .input-group
+      /      = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Find a course", class: 'form-control-sm'
+      /      %span.input-group-append
+      /        %button.btn.btn-primary.btn-sm{:type => "submit"}
+      /          %span.fa.fa-search{"aria-hidden" => "true"}
       %ul.navbar-nav.mr-right
-        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(root_path)}"}
-          = link_to root_path, class: 'nav-link' do
-            .fa.fa-home
-            Another link
         %li.nav-item.dropdown
           %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
             %b= current_user.email

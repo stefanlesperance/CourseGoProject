@@ -1,0 +1,48 @@
+.card
+	.card-header
+		.fa.fa-user
+		= link_to user.email, user_path(user)
+		.row
+		- if user.online?
+			.text-success.far.fa-circle
+		- else
+			.text-danger.far.fa-circle
+	.card-footer
+		Signed Up
+		= time_ago_in_words(user.created_at)
+		ago
+	.card-footer
+		.row
+		= 'Sign In Count'.humanize
+		= user.sign_in_count
+		.row
+		= 'Current Sign In'.humanize
+		= user.current_sign_in_at
+		.row
+		= 'Last Sign In'.humanize
+		= user.last_sign_in_at
+		.row
+		= 'Current IP'.humanize
+		= user.current_sign_in_ip
+		.row
+		= 'Last IP'.humanize
+		= user.last_sign_in_ip
+	.card-footer
+		.row
+		= 'Courses:'.humanize
+		= user.courses_count
+		.row
+		= 'Enrollments:'.humanize
+		= user.enrollments_count
+	.card-footer
+		Confirmed email?
+		-if user.confirmed_at.present?
+			.badge.badge-success Yes
+		-else
+			.badge.badge-danger No
+	.card-footer
+		- user.roles.each do |role|
+			.badge.badge-info
+				= role.name
+		- if policy(user).edit?
+			= link_to 'Edit Roles', edit_user_path(user), class: 'btn btn-sm btn-warning'

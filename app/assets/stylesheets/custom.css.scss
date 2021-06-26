@@ -4,7 +4,13 @@
 
 
 
-.nav > li > a:focus, .nav > li > a:hover {
-    text-decoration: none;
-    background-color: #eee;
+
+
+.form-control.is-invalid {background-image: none !important;}
+.form-control.is-valid {background-image: none !important;}
+
+
+a:hover {
+  color: #fff !important;
+  background-color: transparent !important;
 }

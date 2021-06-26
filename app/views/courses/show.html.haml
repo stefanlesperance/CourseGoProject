@@ -1,8 +1,56 @@
+- content_for :title do 
+	Coursego
+	\|
+	= @course.title
+
+
+
 = link_to 'Courses', courses_path
 \/
 = link_to @course.title ,course_path(@course)
 
 %p
-
-= render 'courses/course', course: @course
+.row
+	.col-lg-8.order-0-order-lg-1
+		.jumbotron
+			%h2
+				.fa.fa-graduation-cap
+				= @course.title
+			%hr
+			.p-3
+			.fa.fa-clock
+			= @course.updated_at.strftime("%d/%b/%Y,%H:%M")
+			.p-3
+			.fa.fa-globe-africa
+			= @course.language
+			.p-3
+			.row
+			.fa.fa-signal
+			= @course.level
+			.p-3
+			.row
+			= @course.description
+		%h4
+			.fa.fa-tasks
+			= pluralize(@course.lessons.count, 'Lesson')
+			.float-right
+				.fa.fa-spinner
+				= number_to_percentage(@course.progress(current_user), precision: 0)
+		%ul.list-group
+			- @lessons.each do |lesson|
+				= render 'lessons/lesson_preview', lesson: lesson
+	
+		%p
+		%h4
+			.fa.fa-comment
+			= pluralize(@enrollments_with_review.count, 'Review')
+			%p
+		- @enrollments_with_review.each do |enrollment|
+			= render 'enrollments/enrollment', enrollment: enrollment
+		%p
+	.col-lg-4.order-0-order-lg-1
+		.sticky-top
+			= render 'courses/course', course: @course
+		%p
+		%p
 

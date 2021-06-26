@@ -1,7 +1,16 @@
+- content_for :title do 
+  Coursego
+  \|
+  New Course
+
+
+
 .card
   .card-header
-    %h1 New course
+    %h3 
+      .fa.fa-graduation-cap
+      New course
   .card-body
     = render 'form'
-
-= link_to 'Back', courses_path
+  .card-footer
+    = link_to 'Back', courses_path

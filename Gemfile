@@ -30,6 +30,13 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'mast
 gem 'devise'
 gem 'friendly_id', '~> 5.4.0'
 gem 'hirb', '~> 0.7.3'
+gem 'ransack'
+gem 'public_activity', '~> 1.5'
+gem "rolify"
+gem "pundit"
+gem 'exception_notification'
+ gem 'pagy'
+
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

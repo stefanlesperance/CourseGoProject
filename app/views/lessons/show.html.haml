@@ -1,0 +1,25 @@
+- content_for :title do 
+  Coursego
+  \|
+  = @lesson.course.title
+  \|
+  = @lesson.title
+
+
+
+%p#notice=notice
+
+-# Below is a solid breadcrumbs style to emulate
+
+= link_to 'Courses', courses_path
+\/
+= link_to @lesson.course.title ,course_path(@lesson.course)
+\/
+= link_to @lesson.title ,course_lesson_path(@course, @lesson)
+.row
+  .col-lg-6
+    = render 'lessons/lesson', lesson: @lesson
+
+= link_to 'Edit', edit_course_lesson_path(@lesson)
+\|
+= link_to 'Back to Course', course_path(@lesson.course)

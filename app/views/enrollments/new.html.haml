@@ -1,0 +1,22 @@
+- content_for :title do 
+  Coursego
+  \|
+  New Enrollment
+
+
+%h3 New enrollment
+.card
+  .card-header
+    %h3 
+      .fa.fa-graduation-cap
+      = link_to @course.title, course_path(@course)
+      %hr
+        .fa.fa-lock-open
+        Buy Course
+  .card-body
+    = form_tag course_enrollments_path(@course) do
+      = submit_tag "Pay #{number_to_currency(@course.price)}", class: "btn btn-md btn-success"
+
+  .card-footer
+    = link_to 'Back', enrollments_path
+

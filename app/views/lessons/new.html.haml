@@ -1,0 +1,39 @@
+- content_for :title do 
+	Coursego
+	\|
+	= @course.title
+	\|
+	New Lesson
+
+
+
+
+= link_to 'Courses', courses_path
+\/
+= link_to @course.title ,course_path(@course)
+\/
+New Lesson
+
+
+.card
+	.card-header
+		%h3
+			.far.fa-check-square
+			New lesson
+	.card-body
+		= render 'form'
+	.card-footer
+		= link_to 'Back', course_path(@course)
+-# Below is a solid breadcrumbs style to emulate
+
+/ = link_to 'Courses', courses_path
+/ \/
+/ = link_to @course.title ,course_path(@course)
+/ \/
+/ New Lesson
+
+
+
+
+
+/= link_to 'Back', course_path(@course)
