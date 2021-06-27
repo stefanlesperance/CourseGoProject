@@ -76,6 +76,14 @@
               = link_to analytics_path, class: 'dropdown-item' do
                 .fa.fa-chart-pie
                 %b Analytics
+              = link_to activity_path, class: 'dropdown-item' do
+                .fa.fa-signal
+                %b Activity
+              = link_to unapproved_courses_path, class: 'dropdown-item' do
+                .fa.fa-signal
+                %b Unapproved Courses
+                .badge.badge-danger
+                  = Course.unapproved.count
       /SEARCH IN NAVBAR
 
       /.form-inline.my-2.my-lg-0

@@ -18,15 +18,24 @@ class HomeController < ApplicationController
   end
 
   def activity
-    @activity = PublicActivity::Activity.all
+    if current_user.has_role?(:admin)
+      @activity = PublicActivity::Activity.all
+    else
+      redirect_to root_path, alert: "You require admin rights for that."
+    end
+
   end
 
 
   def analytics
-    @users = User.all
-    @enrollments = Enrollment.all
-    #Most popular courses 
-    @courses = Course.all
-    #@popular_courses = Course.where('enrollments_count > 0')
+    if current_user.has_role?(:admin)
+      #@users = User.all
+      #@enrollments = Enrollment.all
+      #Most popular courses 
+      #@courses = Course.all
+      #@popular_courses = Course.where('enrollments_count > 0')
+    else
+      redirect_to root_path, alert: "You require admin rights for that." 
+    end
   end
 end

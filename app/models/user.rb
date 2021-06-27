@@ -20,9 +20,12 @@ class User < ApplicationRecord
   end
 
   def view_lesson(lesson)
-    unless self.user_lessons.where(lesson: lesson).any?
+    user_lesson = self.user_lessons.where(lesson: lesson) 
+    unless user_lesson.any?
       #Above verifies if any record exists with combination of user and lesson id, before proceeding to the next step.
       self.user_lessons.create(lesson: lesson)
+    else
+      user_lesson.first.increment!(:impressions)
     end
   end
 

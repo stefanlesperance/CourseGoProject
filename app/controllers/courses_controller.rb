@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :set_course, only: %i[ show edit update destroy approve unapprove ]
 
   # GET /courses or /courses.json
   def index
@@ -13,7 +13,7 @@ class CoursesController < ApplicationController
       #@courses = @q.result.includes(distinct: true)
       #@courses = @q.result.includes(:user)
       @ransack_path = courses_path 
-      @ransack_courses = Course.ransack(params[:courses_search], search_key: :courses_search)
+      @ransack_courses = Course.published.approved.ransack(params[:courses_search], search_key: :courses_search)
       #@courses = @ransack_courses.result.includes(:user)
       @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
   end
@@ -44,6 +44,31 @@ class CoursesController < ApplicationController
     #Here I only need the course to tell me what the user id of the creator is
     @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
     render 'index'
+  end
+
+  def unapproved
+    @ransack_path = unapproved_courses_path
+    @ransack_courses = Course.where(user: current_user ).ransack(params[:courses_search], search_key: :courses_search)
+    #Here I only need the course to tell me what the user id of the creator is
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
+    render 'index'
+  end
+
+
+  #Admin controlled button that allows course to be viewed in the all course section.
+  def approve
+    #The below method is me authorizing a SPECIFC policy for a method. It can be reused if method != policy name
+    authorize @course, :approve?
+    @course.update_attribute(:approved, true)
+    redirect_to @course, notice: "Course approved!"
+  end
+
+
+  def unapprove
+    #The below method is me authorizing a SPECIFC policy for a method. It can be reused if method != policy name
+    authorize @course, :approve?
+    @course.update_attribute(:approved, false)
+    redirect_to @course, alert: "Course unapproved and hidden!"
   end
 
   def show
@@ -113,6 +138,6 @@ class CoursesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def course_params
-      params.require(:course).permit(:title, :description, :short_description, :language, :level, :price)
+      params.require(:course).permit(:title, :description, :short_description, :published, :language, :level, :price)
     end
 end

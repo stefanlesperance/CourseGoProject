@@ -18,6 +18,10 @@ class Course < ApplicationRecord
 	scope :top_rated_courses, -> {order(average_rating: :desc, created_at: :desc).limit(3)}
 	scope :latest_courses, -> {all.limit(3).order(created_at: :desc)}
 	scope :all_courses, -> {all.limit(3)}
+	scope :published, -> {where(published: true)}
+	scope :unpublished, -> {where(published: false)}
+	scope :approved, -> {where(approved: true)}
+	scope :unapproved, -> {where(approved: false)}
 
 
 	def to_s
