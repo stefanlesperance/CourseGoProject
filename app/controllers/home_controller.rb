@@ -20,4 +20,13 @@ class HomeController < ApplicationController
   def activity
     @activity = PublicActivity::Activity.all
   end
+
+
+  def analytics
+    @users = User.all
+    @enrollments = Enrollment.all
+    #Most popular courses 
+    @courses = Course.all
+    #@popular_courses = Course.where('enrollments_count > 0')
+  end
 end

@@ -12,6 +12,9 @@ class LessonsController < ApplicationController
     authorize @lesson
     # view_lesson beingthe method which verifies things first. Called from, presumably, user.rb (not lesson.rb)
     current_user.view_lesson(@lesson)
+    #Course works because in private set_lesson we already have it set, as part of set_lesson. This means the below code
+    #will function as expected
+     @lessons = @course.lessons
   end
 
   # GET /lessons/new

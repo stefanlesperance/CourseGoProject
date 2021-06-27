@@ -12,6 +12,8 @@ import 'bootstrap/dist/js/bootstrap'
 import 'bootstrap/dist/css/bootstrap'
 require("@rails/actiontext")
 require("@rails/ujs")
+import "chartkick/chart.js"
+
 
 Rails.start()
 Turbolinks.start()

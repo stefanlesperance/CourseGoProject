@@ -1,0 +1,15 @@
+%h3
+	Users Created
+= line_chart @users.group_by_hour(:created_at).count
+%p
+
+%h3
+	Enrollments Created
+= column_chart @enrollments.group_by_day(:created_at).count
+
+%h3
+	Course Popularity
+/= pie_chart @courses.group(:enrollments_count).count
+/In the below code, we group by and then pass well, I don't quite know why the '' - It ensures the second part is treated
+/as a symbol as well. Further research required
+= pie_chart @enrollments.joins(:course).group(:'courses.title').count

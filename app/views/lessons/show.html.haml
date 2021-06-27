@@ -1,8 +1,10 @@
 - content_for :title do 
   Coursego
   \|
+  Course
   = @lesson.course.title
   \|
+  Lesson
   = @lesson.title
 
 
@@ -13,13 +15,38 @@
 
 = link_to 'Courses', courses_path
 \/
-= link_to @lesson.course.title ,course_path(@lesson.course)
+= link_to course_path(@lesson.course) do
+  .fa.fa-graduation-cap
+  = @lesson.course.title  
 \/
-= link_to @lesson.title ,course_lesson_path(@course, @lesson)
-.row
-  .col-lg-6
-    = render 'lessons/lesson', lesson: @lesson
+= link_to course_lesson_path(@course, @lesson) do
+  .fa.fa-graduation-cap
+  = @lesson.course.title  
 
-= link_to 'Edit', edit_course_lesson_path(@lesson)
-\|
-= link_to 'Back to Course', course_path(@lesson.course)
+%p
+
+.row
+  .col-lg-8
+    = render 'lessons/lesson', lesson: @lesson
+    %p
+  .col-lg-4
+    %ul.list-group
+      %li.list-group-item
+        = link_to course_path(@lesson.course) do
+          .fa.fa-graduation-cap
+          = @lesson.course.title 
+        %p
+        .row
+        .fa.fa-spinner
+        =number_to_percentage(@course.progress(current_user), precision: 0) 
+      - @lessons.each do |lesson|
+        /If the lesson is present, meaning the @lesson we passed in the render above.
+        /and Lesson (do variable) is equal to the one passed above, use success LGIS
+        - if @lesson.present? && lesson == @lesson
+          %li.list-group-item.bg.list-group-item-success
+            = render 'lessons/lesson_preview', lesson: lesson
+        - else
+          %li.list-group-item.bg
+            = render 'lessons/lesson_preview', lesson: lesson
+
+
