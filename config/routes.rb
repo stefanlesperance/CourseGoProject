@@ -16,5 +16,7 @@ Rails.application.routes.draw do
   get 'activity', to: 'home#activity'
   get 'analytics', to: 'home#analytics'
 
+  #For test purposes.
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
