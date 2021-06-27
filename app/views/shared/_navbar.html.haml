@@ -68,14 +68,14 @@
                 %b Users
                 .badge.badge-danger
                   = User.count
-              = link_to activity_path, class: 'dropdown-item' do
-                .fa.fa-bell
-                %b Activity
               = link_to enrollments_path, class: 'dropdown-item' do
                 .fa.fa-lock-open
                 %b Enrollments
                 .badge.badge-danger
                   = Enrollment.count
+              = link_to analytics_path, class: 'dropdown-item' do
+                .fa.fa-chart-pie
+                %b Analytics
       /SEARCH IN NAVBAR
 
       /.form-inline.my-2.my-lg-0

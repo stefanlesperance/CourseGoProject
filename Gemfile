@@ -35,7 +35,9 @@ gem 'public_activity', '~> 1.5'
 gem "rolify"
 gem "pundit"
 gem 'exception_notification'
- gem 'pagy'
+gem 'pagy'
+gem "chartkick"
+gem 'groupdate'
 
 
 # Use Active Storage variant

@@ -90,6 +90,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    chartkick (4.0.4)
     childprocess (3.0.0)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
@@ -112,6 +113,8 @@ GEM
       activerecord (>= 4.0.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    groupdate (5.2.2)
+      activesupport (>= 5)
     haml (5.2.1)
       temple (>= 0.8.0)
       tilt
@@ -280,11 +283,13 @@ DEPENDENCIES
   bootstrap
   byebug
   capybara (>= 3.26)
+  chartkick
   devise
   exception_notification
   faker!
   font-awesome-sass (~> 5.15.1)
   friendly_id (~> 5.4.0)
+  groupdate
   haml-rails (~> 2.0)
   hirb (~> 0.7.3)
   jbuilder (~> 2.7)
