@@ -55,13 +55,14 @@
 
 
 
-%hr
-%h2
-	.fa.fa-user-graduate
-	Contine Learning
-.card-columns
-	- @purchased_courses.each do |course|
-		= render 'courses/course', course: course
+- if current_user	
+	%hr
+	%h2
+		.fa.fa-user-graduate
+		Contine Learning
+	.card-columns
+		- @purchased_courses.each do |course|
+			= render 'courses/course', course: course
 
 %hr
 %h2
