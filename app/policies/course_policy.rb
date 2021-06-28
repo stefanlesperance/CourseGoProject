@@ -13,7 +13,7 @@ class CoursePolicy < ApplicationPolicy
     #If the user CREATED the course.
     @user.present? && @record.user == @user ||
     #If said user has already purchased the course. 
-    @record.bought(@user)
+    @user.present? && @record.bought(@user)
 
   end
 

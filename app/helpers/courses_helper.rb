@@ -23,7 +23,7 @@ module CoursesHelper
 			end
 		else
 			#For people not logged in, this will trigger them to be logged in, and then redirected to the course path
-			link_to "Check Price", course_path(course), class: "btn btn-md btn-success"
+			link_to "Check Price", new_course_enrollment_path(course), class: "btn btn-md btn-success"
 		end
 	end
 
