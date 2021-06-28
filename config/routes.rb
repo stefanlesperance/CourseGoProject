@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   resources :courses do
     get :purchased, :pending_review, :created, :unapproved, on: :collection
     #I believe member here stands for current course
+    #The member do lets me nest things within the show action. - How do I know its specifically show? What made it show.
     member do
       #This will add two new accounts in our routes.
+      get :analytics
       patch :approve
       patch :unapprove
     end

@@ -1,4 +1,4 @@
-%h3
+%h3.text-center
 	Users Created
 /Old Style - inefficient
 /= line_chart @users.group_by_hour(:created_at).count
@@ -6,11 +6,12 @@
 = line_chart charts_users_per_day_path
 %p
 
-%h3
+%h3.text-center
 	Enrollments Created
 = column_chart charts_enrollments_per_day_path
+%p
 
-%h3
+%h3.text-center
 	Course Popularity
 /= pie_chart @courses.group(:enrollments_count).count
 /In the below code, we group by and then pass well, I don't quite know why the '' - It ensures the second part is treated
@@ -19,6 +20,6 @@
 
 %p
 
-%h3
+%h3.text-center
 	Money Makers
 = column_chart charts_money_makers_path

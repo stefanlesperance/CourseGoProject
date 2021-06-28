@@ -17,7 +17,6 @@ class CoursePolicy < ApplicationPolicy
 
   end
 
-
   def edit?
     @record.user_id == user.id
   end
