@@ -6,9 +6,15 @@ class CoursePolicy < ApplicationPolicy
   end
   
   def show?
+    #If it is published and approved.
+    @record.published && @record.approved || 
+    #If the user is an administrator
     @user.present? && @user.has_role?(:admin) ||
-    @user.present? && @record.user_id == @user.id ||
-    @user.present? && @record.bought(@user)
+    #If the user CREATED the course.
+    @user.present? && @record.user == @user ||
+    #If said user has already purchased the course. 
+    @record.bought(@user)
+
   end
 
 

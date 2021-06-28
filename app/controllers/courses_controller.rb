@@ -70,8 +70,9 @@ class CoursesController < ApplicationController
     @course.update_attribute(:approved, false)
     redirect_to @course, alert: "Course unapproved and hidden!"
   end
-
+  
   def show
+    authorize @course
     @lessons = @course.lessons
     @enrollments_with_review = @course.enrollments.reviewed
   end 
