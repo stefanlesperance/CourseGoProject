@@ -13,7 +13,8 @@ class LessonPolicy < ApplicationPolicy
 
   def edit?
     #@record.course.user_id == user.id - means only owner/creator, as given by the id, can edit
-    @record.course.user_id == @user.id
+    #@record.course.user_id == @user.id
+    @user.present? && @record.course.user_id == @user.id
   end
 
   def update?

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 	before_action :authenticate_user!
+	after_action :user_activity, if: :user_signed_in?
 
-	after_action :user_activity
 
 	include Pagy::Backend
 
